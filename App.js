@@ -1,13 +1,14 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
+const router = require("./router/auth-router");
+const connectDB = require("./controllers/utils/db");
 
-app.get("/", (req, res) => {
-  res.status(400).send("Root");
-});
+app.use(express.json());
 
-app.get("/register", (req, res) => {
-  res.status(200).send("Register Page");
-});
+app.use("/", router);
+
+connectDB();
 
 const PORT = 8080;
 app.listen(PORT, () => {
